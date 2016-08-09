@@ -1,0 +1,32 @@
+------------------------------------------------ 1:
+Numero massimo pacchetti in coda: 1000
+Tempo medio attesa in coda:0,0045 secondi
+Response time:0,0442 secondi
+Service time:0,0396 secondi
+Picco di attesa: 5,36 secondi
+Costo Totale: 2186,97 $
+Reconfigurations: 262
+Availability: 99,9700%
+Pacchetti totali: 140992323
+-----fine simulazione con booting time:900.0 isteresi: 3 timeout:3600.0
+awt media: 0,0045 min: 0,0045 Max: 0,0045
+peak medio: 5,36 Min : 5,36 Max : 5,36
+cost medio: 2186,97 Min: 2186,97 Max : 2186,97
+reconfigurations medio: 262 Min: 262 Max reconfigurations: 262
+availab media: 99,9700 Min: 99,9700 Max: 99,9700
+------------------------------------------------ 1:
+Numero massimo pacchetti in coda: 1000
+Tempo medio attesa in coda:0,0019 secondi
+Response time:0,0403 secondi
+Service time:0,0383 secondi
+Picco di attesa: 30,39 secondi
+Costo Totale: 2176,40 $
+Reconfigurations: 261
+Availability: 99,9769%
+Pacchetti totali: 140983938
+-----fine simulazione con booting time:900.0 isteresi: 3 timeout:3600.0
+awt media: 0,0019 min: 0,0019 Max: 0,0019
+peak medio: 30,39 Min : 30,39 Max : 30,39
+cost medio: 2176,40 Min: 2176,40 Max : 2176,40
+reconfigurations medio: 261 Min: 261 Max reconfigurations: 261
+availab media: 99,9769 Min: 99,9769 Max: 99,9769
