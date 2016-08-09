@@ -2,9 +2,9 @@ package classes_package;
 
 import java.io.IOException;
 
-public class EntryPoint {
+public class Start {
 	
-	public EntryPoint(){
+	public Start(){
 		
 	}
 	
