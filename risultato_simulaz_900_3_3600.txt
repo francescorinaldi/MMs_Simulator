@@ -30,3 +30,23 @@ peak medio: 30,39 Min : 30,39 Max : 30,39
 cost medio: 2176,40 Min: 2176,40 Max : 2176,40
 reconfigurations medio: 261 Min: 261 Max reconfigurations: 261
 availab media: 99,9769 Min: 99,9769 Max: 99,9769
+------------------------------------------------ 1:
+Numero massimo pacchetti in coda: 1000
+Tempo medio attesa in coda:0,0435 secondi
+Response time:0,1030 secondi
+Service time:0,0595 secondi
+Picco di attesa: 94,81 secondi
+Costo Totale: 2187,98 $
+Reconfigurations: 265
+Availability: 99,8936%
+Pacchetti totali: 140981369
+------------------------------------------------ 2:
+Numero massimo pacchetti in coda: 1000
+Tempo medio attesa in coda:0,0245 secondi
+Response time:0,0773 secondi
+Service time:0,0528 secondi
+Picco di attesa: 45,66 secondi
+Costo Totale: 2174,75 $
+Reconfigurations: 264
+Availability: 99,9271%
+Pacchetti totali: 140998300
