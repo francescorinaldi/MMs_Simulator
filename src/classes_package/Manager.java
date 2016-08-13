@@ -14,9 +14,6 @@ import java.util.ListIterator;
 
 import org.jfree.ui.RefineryUtilities;
 
-
-
-
 public class Manager {
 
 	Integer nextServerToServe;
@@ -31,17 +28,17 @@ public class Manager {
 	//double[] data = new double[40000000];
 	//int[] data = new int[40000000];
 	//RandomVariateGen genServ = new ExponentialGen (new MRG32k3a(), 20.34);
-	RepetitaIuvant repet;
+	Simulation simulation;
 
 	
-	public Manager(double intrvl, LinkedList <Server> servList ,Queue queue, ServersHandler mainHandler, int simNumber, RepetitaIuvant repe){
-		serversList=servList;
-		handler=mainHandler;
+	public Manager(double intrvl, LinkedList <Server> servList ,Queue queue, ServersHandler mainHandler, int simNumber, Simulation s){
+		serversList = servList;
+		handler = mainHandler;
 		mainQueue = queue; 
 		arrivals_generator = new Arrivals (this,queue);
-		interval=intrvl;
-		simulationNumber=simNumber;
-		repet=repe;
+		interval = intrvl;
+		simulationNumber = simNumber;
+		simulation = s;
 	}
 	
 	public void startManager () 
@@ -183,23 +180,23 @@ public class Manager {
 				 peak=mainQueue.maxWaitingTimeInQueue;
 				 availability=100.00-(((double)mainQueue.lostRequests/(double)arrivals_generator.totalRequests)*100.0);
 				// segna i massimi
-				 if(awt>repet.maxAwt) repet.maxAwt=awt;
-				 if(peak> repet.maxPeak) repet.maxPeak=peak;
-				 if(totalCost>repet.maxCost) repet.maxCost=totalCost;
-				 if(availability> repet.maxAvailability) repet.maxAvailability= availability;
-				 if(handler.activatedBuckets>repet.maxReconf) repet.maxReconf=handler.activatedBuckets;
+				 if(awt>simulation.maxAwt) simulation.maxAwt=awt;
+				 if(peak> simulation.maxPeak) simulation.maxPeak=peak;
+				 if(totalCost>simulation.maxCost) simulation.maxCost=totalCost;
+				 if(availability> simulation.maxAvailability) simulation.maxAvailability= availability;
+				 if(handler.activatedBuckets>simulation.maxReconf) simulation.maxReconf=handler.activatedBuckets;
 				 //segna i minimi
-				 if(awt<repet.minAwt) repet.minAwt=awt;
-				 if(peak< repet.minPeak) repet.minPeak=peak;
-				 if(totalCost<repet.minCost) repet.minCost=totalCost;
-				 if(availability<repet.minAvailability) repet.minAvailability= availability;
-				 if(handler.activatedBuckets<repet.minReconf) repet.minReconf=handler.activatedBuckets;
+				 if(awt<simulation.minAwt) simulation.minAwt=awt;
+				 if(peak< simulation.minPeak) simulation.minPeak=peak;
+				 if(totalCost<simulation.minCost) simulation.minCost=totalCost;
+				 if(availability<simulation.minAvailability) simulation.minAvailability= availability;
+				 if(handler.activatedBuckets<simulation.minReconf) simulation.minReconf=handler.activatedBuckets;
 				 //sommeeeeee
-				 repet.totAvailability+=availability;
-				 repet.totAwt+=awt;
-				 repet.totCost+=totalCost;
-				 repet.totPeak+=peak;
-				 repet.totReconf+=handler.activatedBuckets;
+				 simulation.totAvailability+=availability;
+				 simulation.totAwt+=awt;
+				 simulation.totCost+=totalCost;
+				 simulation.totPeak+=peak;
+				 simulation.totReconf+=handler.activatedBuckets;
 				return;
 				
 			}

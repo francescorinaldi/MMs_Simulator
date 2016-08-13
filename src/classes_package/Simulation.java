@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class RepetitaIuvant {
+public class Simulation{
 	int i, maxReconf=0, minReconf=999999, totReconf=0;
 	double maxAwt=0.0, maxAvailability=0.0, maxPeak=0.0, maxCost=0.0;
 	double minAwt=999.0, minAvailability=9999.0, minPeak=9999.0, minCost=999999.0;
@@ -13,17 +13,14 @@ public class RepetitaIuvant {
 	double averageBootingTime=0.0;
 	double firstDeactivationTimeOut=0.0;
 	
-	public void main () throws IOException{
+	public void main (Settings settings) throws IOException{
 		
 		//These are the parameters needed to do several simulations.
-		double [] bootingTime={900.0};
-		double [] deactivationTimeout={3600.0};
-		int [] isteresi={3};
-		
-		//In my opinion these parameters should not be fixed.
+		double [] bootingTime={settings.getBootingTime()};
+		double [] deactivationTimeout={settings.getDeactivationTimeout()};
+		int [] isteresi={settings.getIsteresi()};
 		
 		int iterazioni=1;                //NUMERO ITERAZIONI PER OGNI SCENARIO
-		
 		int j=0;
 		
 		for(j=0; j<bootingTime.length; j++){

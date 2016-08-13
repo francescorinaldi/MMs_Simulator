@@ -23,7 +23,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 
 	
 	//classe rinominabile in ServersHandlerDeactivationThreshold
-	public void main (double booting, double timeout, int isteresi,RepetitaIuvant repe, int simulationNumber) 
+	public void main (double booting, double timeout, int isteresi, Simulation simulation, int simulationNumber) 
 	{
 		double interval=10.0;//Interval in seconds between two values in the log file.
 		mainQueue = new Queue(1000); //A global queue for all the classes is instantiated 
@@ -60,7 +60,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		}
 		
 		//Start the Manager
-		mainManager=new Manager(interval, serversList, mainQueue,this,simulationNumber, repe);
+		mainManager=new Manager(interval, serversList, mainQueue,this,simulationNumber, simulation);
 		paymentsHandler = new PaymentsHandler(typeOfReservedVMs, ondemandVMs, mainManager, minBillingTime);
 
 		mainManager.startManager();

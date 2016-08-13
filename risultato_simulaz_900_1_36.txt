@@ -1,0 +1,16 @@
+------------------------------------------------ 1:
+Numero massimo pacchetti in coda: 1000
+Tempo medio attesa in coda:0,1044 secondi
+Response time:0,1547 secondi
+Service time:0,0503 secondi
+Picco di attesa: 79,16 secondi
+Costo Totale: 2193,47 $
+Reconfigurations: 1408
+Availability: 99,8212%
+Pacchetti totali: 140993700
+-----fine simulazione con booting time:900.0 isteresi: 1 timeout:36.0
+awt media: 0,1044 min: 0,1044 Max: 0,1044
+peak medio: 79,16 Min : 79,16 Max : 79,16
+cost medio: 2193,47 Min: 2193,47 Max : 2193,47
+reconfigurations medio: 1408 Min: 1408 Max reconfigurations: 1408
+availab media: 99,8212 Min: 99,8212 Max: 99,8212
