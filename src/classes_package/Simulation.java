@@ -22,8 +22,10 @@ public class Simulation{
 		double [] deactivationTimeout={settings.getDeactivationTimeout()};
 		int [] isteresi={settings.getIsteresi()};
 		
-		int iterations=1;                //NUMERO ITERAZIONI PER OGNI SCENARIO
+		int iterations = settings.getIterations();                //NUMERO ITERAZIONI PER OGNI SCENARIO
 		int j=0;
+		
+		settings.main();
 		
 		for(j=0; j<bootingTime.length; j++){
 			
