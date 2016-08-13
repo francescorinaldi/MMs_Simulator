@@ -26,21 +26,25 @@ public class MMs_Simulator_GUI extends JPanel
     private double bootingTime = 900.00;
     private double deactivationTimeout = 3600.00;
     private int isteresi = 3;
+    private int iterations = 1;
 
     //Labels to identify the fields
     private JLabel bootingTimeLabel;
     private JLabel deactivationTimeoutLabel;
     private JLabel isteresiLabel;
+    private JLabel iterationsLabel;
     
     //Strings for the labels
     private static String bootingTimeString = "Booting Time: ";
     private static String deactivationTimeoutString = "DeactivationTimeout: ";
     private static String isteresiString = "Isteresi: ";
+    private static String iterationsString = "Iterations: ";
 
     //Fields for data entry
     private static JFormattedTextField bootingTimeField;
     private static JFormattedTextField deactivationTimeoutField;
     private static JFormattedTextField isteresiField;
+    private static JFormattedTextField iterationsField;
 
     //Formats to format and parse numbers
     private NumberFormat decimalFormat;
@@ -66,6 +70,7 @@ public class MMs_Simulator_GUI extends JPanel
         bootingTimeLabel = new JLabel(bootingTimeString);
         deactivationTimeoutLabel = new JLabel(deactivationTimeoutString);
         isteresiLabel = new JLabel(isteresiString);
+        iterationsLabel = new JLabel(iterationsString);
 
         //Create the text fields and set them up.
         bootingTimeField = new JFormattedTextField(decimalFormat);
@@ -83,16 +88,23 @@ public class MMs_Simulator_GUI extends JPanel
         isteresiField.setColumns(10);
         isteresiField.addPropertyChangeListener("value", this);
         
-        //Tell accessibility tools about label/textfield pairs.
+        iterationsField = new JFormattedTextField();
+        iterationsField.setValue(new Integer(iterations));
+        iterationsField.setColumns(10);
+        iterationsField.addPropertyChangeListener("value", this);
+        
+        //Tell accessibility tools about label / textfield pairs.
         bootingTimeLabel.setLabelFor(bootingTimeField);
         deactivationTimeoutLabel.setLabelFor(deactivationTimeoutField);
         isteresiLabel.setLabelFor(isteresiField);
+        iterationsLabel.setLabelFor(iterationsField);
 
         //Lay out the labels in a panel.
         JPanel labelPane = new JPanel(new GridLayout(0,1));
         labelPane.add(bootingTimeLabel);
         labelPane.add(deactivationTimeoutLabel);
         labelPane.add(isteresiLabel);
+        labelPane.add(iterationsLabel);
         labelPane.add(btnOK);
         
         //Layout the text fields in a panel.
@@ -100,6 +112,7 @@ public class MMs_Simulator_GUI extends JPanel
         fieldPane.add(bootingTimeField);
         fieldPane.add(deactivationTimeoutField);
         fieldPane.add(isteresiField);
+        fieldPane.add(iterationsField);
         fieldPane.add(btnCancel);
 
         //Put the panels in this panel, labels on left,
@@ -118,6 +131,8 @@ public class MMs_Simulator_GUI extends JPanel
             deactivationTimeout = ((Number)deactivationTimeoutField.getValue()).doubleValue();
         } else if (source == isteresiField) {
         	isteresi = ((Number)isteresiField.getValue()).intValue();
+        } else if (source == iterationsField) {
+        	iterations = ((Number)iterationsField.getValue()).intValue();
         }
     }
     
@@ -129,20 +144,15 @@ public class MMs_Simulator_GUI extends JPanel
     private static void createAndShowGUI() {
         //Make sure we have nice window decorations.
         JFrame.setDefaultLookAndFeelDecorated(true);
-        
-        //JDialog.setDefaultLookAndFeelDecorated(true);
 
         //Create and set up the window.
         JFrame frame = new JFrame("Please select Booting Time, Deactivation Timeout and Isteresi: ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        //JDialog dialog = new JDialog();
-        
         //Create and set up the content pane.
         JComponent newContentPane = new MMs_Simulator_GUI();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
-        //dialog.setContentPane(newContentPane);
         
         btnOK.addActionListener(new ActionListener() {
 
@@ -151,11 +161,13 @@ public class MMs_Simulator_GUI extends JPanel
                 double bootingTime = Double.valueOf(bootingTimeField.getText());
                 double deactivationTimeout = Double.valueOf(deactivationTimeoutField.getText());
                 int isteresi = Integer.parseInt(isteresiField.getText());
-                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout :" + deactivationTimeout + "\nIsteresi: " + isteresi);
+                int iterations = Integer.parseInt(iterationsField.getText());
+                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout :" + deactivationTimeout + "\nIsteresi: " + isteresi + "\nIterations: " + iterations);
                 
                 settings.setBootingTime(bootingTime);
                 settings.setDeactivationTimeout(deactivationTimeout);
                 settings.setIsteresi(isteresi);
+                settings.setIterations(iterations);
  
                 settings.main();
                 
