@@ -183,7 +183,7 @@ public class MMs_Simulator_GUI extends JPanel
         	
         	@Override
         	public void actionPerformed(ActionEvent e){
-        		frame.dispose();
+        		System.exit(0);
         	}
         	
         });
