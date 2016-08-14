@@ -317,7 +317,7 @@ public class Advanced_Settings_GUI extends JPanel
         JFrame.setDefaultLookAndFeelDecorated(true);
 
         //Create and set up the window.
-        JFrame frame = new JFrame("Please select Booting Time, Deactivation Timeout and Isteresi: ");
+        JFrame frame = new JFrame("Advanced Settings: ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Create and set up the content pane.
