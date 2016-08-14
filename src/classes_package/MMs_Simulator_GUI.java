@@ -48,12 +48,19 @@ public class MMs_Simulator_GUI extends JPanel
 
     //Formats to format and parse numbers
     private NumberFormat decimalFormat;
+    private NumberFormat integerFormat;
     
     // Create OK button
     private static JButton btnOK = new JButton("OK");
 
     // Create Cancel button
     private static JButton btnCancel = new JButton("Cancel");
+    
+    // Create OtherSettings button
+    private static JButton btnAdvancedSettings = new JButton("Advanced Settings");
+    
+    // Create EmptyButton
+    private static JButton btnEmpty = new JButton();
     
     // Create Settings [Default Value]
     private static Settings settings = new Settings();
@@ -83,12 +90,12 @@ public class MMs_Simulator_GUI extends JPanel
         deactivationTimeoutField.setColumns(10);
         deactivationTimeoutField.addPropertyChangeListener("value", this);
 
-        isteresiField = new JFormattedTextField();
+        isteresiField = new JFormattedTextField(integerFormat);
         isteresiField.setValue(new Integer(isteresi));
         isteresiField.setColumns(10);
         isteresiField.addPropertyChangeListener("value", this);
         
-        iterationsField = new JFormattedTextField();
+        iterationsField = new JFormattedTextField(integerFormat);
         iterationsField.setValue(new Integer(iterations));
         iterationsField.setColumns(10);
         iterationsField.addPropertyChangeListener("value", this);
@@ -98,6 +105,10 @@ public class MMs_Simulator_GUI extends JPanel
         deactivationTimeoutLabel.setLabelFor(deactivationTimeoutField);
         isteresiLabel.setLabelFor(isteresiField);
         iterationsLabel.setLabelFor(iterationsField);
+        
+        // Disable btnEmpty and make it not visible.
+        btnEmpty.setEnabled(false);
+        btnEmpty.setVisible(false);
 
         //Lay out the labels in a panel.
         JPanel labelPane = new JPanel(new GridLayout(0,1));
@@ -105,6 +116,7 @@ public class MMs_Simulator_GUI extends JPanel
         labelPane.add(deactivationTimeoutLabel);
         labelPane.add(isteresiLabel);
         labelPane.add(iterationsLabel);
+        labelPane.add(btnAdvancedSettings);
         labelPane.add(btnOK);
         
         //Layout the text fields in a panel.
@@ -113,6 +125,7 @@ public class MMs_Simulator_GUI extends JPanel
         fieldPane.add(deactivationTimeoutField);
         fieldPane.add(isteresiField);
         fieldPane.add(iterationsField);
+        fieldPane.add(btnEmpty);
         fieldPane.add(btnCancel);
 
         //Put the panels in this panel, labels on left,
@@ -154,6 +167,35 @@ public class MMs_Simulator_GUI extends JPanel
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
         
+        btnAdvancedSettings.addActionListener(new ActionListener() {
+        	 
+        	@Override
+             public void actionPerformed(ActionEvent event) {
+                double bootingTime = Double.valueOf(bootingTimeField.getText());
+                double deactivationTimeout = Double.valueOf(deactivationTimeoutField.getText());
+                int isteresi = Integer.parseInt(isteresiField.getText());
+                int iterations = Integer.parseInt(iterationsField.getText());
+                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout : " + deactivationTimeout + "\nIsteresi: " + isteresi + "\nIterations: " + iterations);
+                 
+                settings.setBootingTime(bootingTime);
+                settings.setDeactivationTimeout(deactivationTimeout);
+                settings.setIsteresi(isteresi);
+                settings.setIterations(iterations);
+  
+                settings.main();
+                 
+                Start.setSettings(settings);
+                Start.setInitialization(true);
+                
+                //Start.startSimulation.start();
+        		Start.askAdvancedSettings.start();
+                 
+                frame.dispose();
+             }
+        	
+        	
+        });
+        
         btnOK.addActionListener(new ActionListener() {
 
             @Override
@@ -172,7 +214,8 @@ public class MMs_Simulator_GUI extends JPanel
                 settings.main();
                 
                 Start.setSettings(settings);
-                Start.setInit(true);
+                Start.setInitialization(true);
+                Start.setOtherSettings(true);
                 Start.startSimulation.start();
                 
                 frame.dispose();
@@ -210,5 +253,7 @@ public class MMs_Simulator_GUI extends JPanel
     	decimalFormat.setGroupingUsed(false);
     	decimalFormat.setMaximumFractionDigits(100);
     	decimalFormat.setMinimumFractionDigits(2);
+    	integerFormat = NumberFormat.getNumberInstance(Locale.UK);
+    	integerFormat.setGroupingUsed(false);
     }
 }

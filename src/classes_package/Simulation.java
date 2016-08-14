@@ -6,53 +6,52 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Simulation{
-	int i, maxReconf=0, minReconf=999999, totReconf=0;
+	int i, maxReconf, minReconf, totReconf;
 	
-	double maxAwt=0.0, maxAvailability=0.0, maxPeak=0.0, maxCost=0.0;
-	double minAwt=999.0, minAvailability=9999.0, minPeak=9999.0, minCost=999999.0;
-	double totAwt=0.0, totAvailability=0.0, totPeak=0.0, totCost=0.0;
+	double maxAwt, maxAvailability, maxPeak, maxCost;
+	double minAwt, minAvailability, minPeak, minCost;
+	double totAwt, totAvailability, totPeak, totCost;
 	
-	double averageBootingTime=0.0;
-	double firstDeactivationTimeOut=0.0;
+	double averageBootingTime = 0.0, firstDeactivationTimeOut = 0.0;
 	
-	public void main (Settings settings) throws IOException{
+	public void main (Settings settings, AdvancedSettings advancedSettings) throws IOException{
 		
 		//These are the parameters needed to do several simulations.
-		double [] bootingTime={settings.getBootingTime()};
-		double [] deactivationTimeout={settings.getDeactivationTimeout()};
-		int [] isteresi={settings.getIsteresi()};
+		double [] bootingTime = {settings.getBootingTime()};
+		double [] deactivationTimeout = {settings.getDeactivationTimeout()};
+		int [] isteresi = {settings.getIsteresi()};
 		
 		int iterations = settings.getIterations();                //NUMERO ITERAZIONI PER OGNI SCENARIO
-		int j=0;
+		int j = 0;
 		
 		settings.main();
 		
-		for(j=0; j<bootingTime.length; j++){
+		for(j = 0; j<bootingTime.length; j++){
 			
-			i=0;
+			i = 0;
 			
-			maxReconf=0;
-			minReconf=999999;
-			totReconf=0;
-			maxAwt=0.0;
-			maxAvailability=0.0;
-			maxPeak=0.0;
-			maxCost=0.0;
-			minAwt=999.0;
-			minAvailability=9999.0;
-			minPeak=9999.0;
-			minCost=999999.0;
-			totAwt=0.0;
-			totAvailability=0.0;
-			totPeak=0.0;
-			totCost=0.0;
+			maxReconf = advancedSettings.getMaxReconf();
+			minReconf = advancedSettings.getMinReconf();
+			totReconf = advancedSettings.getTotReconf();
+			maxAwt = advancedSettings.getMaxAwt();
+			maxAvailability = advancedSettings.getMaxAvailability();
+			maxPeak = advancedSettings.getMaxPeak();
+			maxCost = advancedSettings.getMaxCost();
+			minAwt = advancedSettings.getMinAwt();
+			minAvailability = advancedSettings.getMinAvailability();
+			minPeak = advancedSettings.getMinPeak();
+			minCost = advancedSettings.getMinCost();
+			totAwt = advancedSettings.getTotAwt();
+			totAvailability = advancedSettings.getTotAvailability();
+			totPeak = advancedSettings.getTotPeak();
+			totCost = advancedSettings.getTotCost();
 			
-			averageBootingTime=bootingTime[j];
-			firstDeactivationTimeOut=deactivationTimeout[j];
+			averageBootingTime = bootingTime[j];
+			firstDeactivationTimeOut = deactivationTimeout[j];
 			
-			int isteresiLength=isteresi[j];
+			int isteresiLength = isteresi[j];
 			
-				for(i=0;i<iterations;i++){
+				for(i = 0; i<iterations; i++){
 						ServersHandlerDeactivationThreshold mainHandlerHybridCopy = new ServersHandlerDeactivationThreshold ();
 						mainHandlerHybridCopy.main(averageBootingTime,firstDeactivationTimeOut,isteresiLength,this,i);
 					}
