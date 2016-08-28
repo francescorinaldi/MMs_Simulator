@@ -1,19 +1,14 @@
 package classes_package;
 
-import java.io.File;
-
-
-
-
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class XMLparser {
 	
@@ -24,11 +19,10 @@ public class XMLparser {
 			SingleVM newSingleVM;
 		 
 		    try {
-		 
-			File fXmlFile = new File("vmOnDemand_eu-west-1_linux_.xml");
+            InputStream iSXml = XMLparser.class.getResourceAsStream("vmOnDemand_eu-west-1_linux_.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(iSXml);
 		 
 			doc.getDocumentElement().normalize();
 		 		 
@@ -121,16 +115,15 @@ public class XMLparser {
 		  }
 
 	 public static void XMLReserved(ArrayList<VMReservedType> typeOfReservedVMs,ArrayList<Threshold> thresholds){
-		//da rendere più generico, funzionante solo con file generati per log campionati del mondo98
 		 VMReservedType newVMReserved;
 		 Threshold newThreshold;
 		 VMReservedPayment vm_payment;
 		 
-		 try { 
-				File fXmlFile = new File("vmReserved_eu-west-1_linux_c1-xlarge.xml");
+		 try {
+             InputStream iSXml = XMLparser.class.getResourceAsStream("vmReserved_eu-west-1_linux_c1-xlarge.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-				Document doc = dBuilder.parse(fXmlFile);
+				Document doc = dBuilder.parse(iSXml);
 			 
 				doc.getDocumentElement().normalize();
 			 		 

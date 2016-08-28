@@ -2,11 +2,11 @@ package classes_package;
 
 
 
-import java.util.ListIterator;
-
 import umontreal.iro.lecuyer.randvar.ExponentialGen;
 import umontreal.iro.lecuyer.randvar.RandomVariateGen;
 import umontreal.iro.lecuyer.rng.MRG32k3a;
+
+import java.util.ListIterator;
 
 
 public class ServersHandlerDeactivationThreshold extends ServersHandler {
@@ -39,14 +39,12 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		XMLparser.XMLOnDemand(ondemandVMs, thresholds);//Ask the XMLparser to populate singleVMs and thresholds, parsing the XML OnDemand file.
 
 
-		//stampo per verifica lettura da xml
 		for (Threshold t : thresholds){
 			System.out.println("ID soglia: "+t.Id+". Attiva a workload: "+t.WorkLoad+". Da attivare: ");
 			for (SingleVM vm : t.VMsToActivate){
 				System.out.println("N°: "+vm.num+" di tipo: "+vm.vm_name);
 			}
 		}
-		//assegno le deactivation thresholds
 		for(i=0;i<(thresholds.size()-isteresiLength);i++)
 		{
 			if(i<isteresiLength){
@@ -63,20 +61,19 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		mainManager=new Manager(interval, serversList, mainQueue,this,simulationNumber, simulation);
 		paymentsHandler = new PaymentsHandler(typeOfReservedVMs, ondemandVMs, mainManager, minBillingTime);
 
-		mainManager.startManager();
-		
+        mainManager.startManager();
 		return;
 
 	}
 
-	//invocato da manager quando inizia nuovo intervallo, cercherà buckets da attivare e disattivare
+	// invoked by manager when it starts a new interval
 	public void newLambda(double arrivalRate, double currentTime){
 		
 			this.searchForNewBucketsToActivate(arrivalRate, currentTime);
 			this.setNewBucketsForDeactivation(arrivalRate, currentTime);		
 	}
-	
-	//segno i bucket da ricontrollare dopo un'ora se lambda è sotto a deactivationworkload
+
+    //i mark the bucket to be rechecked after an hour if lambda is below the deactivationworkload
 	public void setNewBucketsForDeactivation(double arrivalRate, double currentTime){
 
 		Threshold ts;
@@ -103,8 +100,8 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		}
 		this.searchForNewBucketsToDeactivate(currentTime, arrivalRate);
 	}
-	
-	//calcola il tempo di quando finirà il current billing time, per aggiornare il deactivationtime di un bucket di VMs
+
+    //It calculates the time when it will end the current billing time, to update the deactivationTime of a bucket of VMs
 	public double nextDeactivationSlot(double tsactivationTime, double currentTime){
 		double nextDeactivationSlot=tsactivationTime;
 		boolean minFound=false;
@@ -120,7 +117,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		
 	}
 	
-	//segna nuovi bucket da attivare dopo il booting time(circa 120 secondi)
+	//it marks new bucket to activate after the booting time(120 seconds)
 	public void searchForNewBucketsToActivate(double arrivalRate, double currentTime){
 		int index;
 		Threshold ts,selectedTs;
@@ -132,7 +129,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		{
 			ts=thresholdsIterator.next();
 			index=-1;
-			if(arrivalRate>=ts.WorkLoad)//inserire qui il controllo dello slow start!
+			if(arrivalRate>=ts.WorkLoad)
 			{
 				index=thresholds.indexOf(ts);
 				selectedTs=thresholds.get(index);
@@ -170,7 +167,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 		}
 	}
 	
-	//decido se spegnere VMs dopo il loro deactivation time in base all'arrival rate attuale
+	//i decide whether to shut down VMs after their deactivation time according to the current arrival rate
 	public void searchForNewBucketsToDeactivate(double currentTime, double arrivalRate){
 		int index;
 		Server serv;
@@ -182,8 +179,7 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 			
 			if(currentTime>=ts.deactivationTime)
 			{
-				if(arrivalRate<ts.deactivationWorkload)//se al deactivationTime l'arrivalRate è ancora sotto alla soglia teorica allora lo spegno,
-											//altrimenti rimetto la soglia nelle activated
+				if(arrivalRate<ts.deactivationWorkload)
 				{
 
 						ListIterator<Server> serversIterator = serversList.listIterator();
@@ -215,7 +211,6 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 					}
 					else{
 							if(useSuggestedSlots){
-								//qui sotto posso usare currentime+1800.0 se voglio avere mezz'ora di minimo
 								ts.deactivationTime=this.nextDeactivationSlot(ts.activationTime, currentTime);
 								//System.out.println("prossimo deactivationtime calcolato: "+ts.deactivationTime);
 							}else{
@@ -230,7 +225,8 @@ public class ServersHandlerDeactivationThreshold extends ServersHandler {
 			}
 		}
 	}
-	//ogni volta che arriva una nuova richiesta in coda la classe Arrivals invoca questa funzione per controllare che ci siano nuovi bucket da att.
+
+    //each time a new request arrives in the queue, the Arrivals class invokes this function to check for new bucket to be activated
 	public void newCurrentTime(double currentTime, double arrivalRate){//Every time a new request arrives into the queue, Arrivals class invoke this method with the currentTime
 												//to check whether there is some new VM to activate.
 

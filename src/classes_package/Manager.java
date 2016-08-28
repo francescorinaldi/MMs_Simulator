@@ -1,18 +1,11 @@
 package classes_package;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.PrintWriter;
+import org.jfree.ui.RefineryUtilities;
+
+import java.io.*;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.ListIterator;
-
-import org.jfree.ui.RefineryUtilities;
 
 public class Manager {
 
@@ -46,14 +39,14 @@ public class Manager {
 			double lambda=0.0;
 			BufferedReader br = null;
 			double currentTime=0.0;
-			int linesNumber=0;
+			int linesNumber=300000;
 			double awt, peak, availability;
-			linesNumber=this.rowsInTheFile("traccia10seconds.txt");
 			
 			try {
 	
 				String sCurrentLine;
-				br = new BufferedReader(new FileReader("traccia10seconds.txt"));
+                InputStream in = getClass().getResourceAsStream("traccia10seconds.txt");
+				br = new BufferedReader(new InputStreamReader(in));
 				
 			//creazione grafici dinamici
 				final DynamicGrapherReconfigurations reconfigurationsGraph = new DynamicGrapherReconfigurations("Reconfigurations");
@@ -92,7 +85,7 @@ public class Manager {
 							muSum+=serv.mu;
 						}
 						
-						//ogni 10 intervalli aggiorno i grafici
+						//every 10 intervals I update the graphics
 					if(elapsedIntervals%10==0){
 							reconfigurationsGraph.newValue(arrivals_generator.totalRequests, serversList.size());
 							requestsInQueueGraph.newValue(arrivals_generator.totalRequests, mainQueue.waitList.size());
@@ -159,11 +152,11 @@ public class Manager {
 				
 				
 				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_"+(int)handler.averageBootingTime+"_"+handler.isteresiLength+"_"+(int)handler.firstDeactivationTimeOut+".txt", true)));
-				out.println("------------------------------------------------ "+(simulationNumber+1)+":");
+				out.println("------------------------------------------------ "+(simulationNumber+1)+":\n");
 				out.println("Numero massimo pacchetti in coda: "+mainQueue.maxDimension);
-				out.println("Tempo medio attesa in coda:"+String.format("%.4f",mainQueue.totalWaitingTimeinQueue/arrivals_generator.totalRequests)+" secondi");
-				out.println("Response time:"+String.format("%.4f",sommaResponseTimes/arrivals_generator.totalRequests)+" secondi");
-				out.println("Service time:"+String.format("%.4f",serviceTimeTot/arrivals_generator.totalRequests)+" secondi");
+				out.println("Tempo medio attesa in coda: "+String.format("%.4f",mainQueue.totalWaitingTimeinQueue/arrivals_generator.totalRequests)+" secondi");
+				out.println("Response time: "+String.format("%.4f",sommaResponseTimes/arrivals_generator.totalRequests)+" secondi");
+				out.println("Service time: "+String.format("%.4f",serviceTimeTot/arrivals_generator.totalRequests)+" secondi");
 				out.println("Picco di attesa: "+String.format("%.2f", mainQueue.maxWaitingTimeInQueue)+" secondi");
 				out.println("Costo Totale: "+String.format("%.2f", totalCost)+" $");
 				out.println("Reconfigurations: "+handler.activatedBuckets);
@@ -235,11 +228,11 @@ public class Manager {
 		}
 	}
 	
-	public int rowsInTheFile(String filename){
+	public int rowsInTheFile(URL filename){
 		LineNumberReader lnr;
 		int rows=0;
 		try {
-			lnr = new LineNumberReader(new FileReader(new File(filename)));
+			lnr = new LineNumberReader(new FileReader(new File(String.valueOf(filename))));
 			try {
 				lnr.skip(Long.MAX_VALUE);
 			} catch (IOException e) {

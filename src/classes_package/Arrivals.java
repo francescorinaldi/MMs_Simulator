@@ -1,13 +1,12 @@
 package classes_package;
 
 
-import java.io.IOException;
-import java.lang.Integer;
-import java.util.LinkedList;
-
 import umontreal.iro.lecuyer.randvar.ExponentialGen;
 import umontreal.iro.lecuyer.randvar.RandomVariateGen;
 import umontreal.iro.lecuyer.rng.MRG32k3a;
+
+import java.io.IOException;
+import java.util.LinkedList;
 
 
 public class Arrivals{
@@ -55,11 +54,9 @@ public class Arrivals{
 		        request.arrivTime =currentTime;
 		        request.requestNumber=totalRequests;
 		        manager.generatedPacketsInInterval++;
-				//manager.storeSingleWaitInQueue(lambda);
 
 		        do{
 		        	if((currentTime<=manager.nextDequeueTime())||(queue.getQueueSize()==0)){
-		        		//System.out.println("faccio enqueue "+currentTime+" e  nextdequeue"+manager.nextDequeueTime());
 		        		successfullyEnqueued=true;
 		        		//debugging
 		        		request.servListSize=manager.serversList.size();

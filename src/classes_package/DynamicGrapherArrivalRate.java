@@ -1,10 +1,5 @@
 package classes_package;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -17,6 +12,9 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * An example to show how we can create a dynamic chart.
@@ -108,12 +106,7 @@ public class DynamicGrapherArrivalRate extends ApplicationFrame {
         plot.setRangeGridlinePaint(Color.lightGray);
                 
         ValueAxis xaxis = plot.getDomainAxis();
-        //xaxis.setAutoRange(true);
-       
-        //Domain axis would show data of 60 seconds for a time
-        //xaxis.setFixedAutoRange(7200000.0);  // 60 seconds
-        //xaxis.setVerticalTickLabels(true);
-        xaxis.setRange(0.0, 140000000.0); //per grafici tesi 2500000 //deafult 140M
+        xaxis.setRange(0.0, 140000000.0); //deafult 140M
 
         ValueAxis yaxis = plot.getRangeAxis();
         yaxis.setRange(0.0, 550.0);
@@ -129,21 +122,9 @@ public class DynamicGrapherArrivalRate extends ApplicationFrame {
        
         return result;
     }
-    /**
-     * Generates an random entry for a particular call made by time for every 1/4th of a second.
-     *
-     * @param e  the action event.
-     */
-//    public void actionPerformed(final ActionEvent e) {
-//       
-//        final double factor = 0.9 + 0.2*Math.random();
-//        this.lastValue = this.lastValue * factor;
-//       
-//        final Millisecond now = new Millisecond();
-//        this.series.add(new Millisecond(), 11);
-//       
-//        System.out.println("Current Time in Milliseconds = " + now.toString()+", Current Value : "+this.lastValue);
-//    }
+
+
+
     public void newValue(int numberOfPackets, double value, double value2) {
         
        

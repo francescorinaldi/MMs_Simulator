@@ -1,12 +1,12 @@
 package classes_package;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-
 import umontreal.iro.lecuyer.randvar.ExponentialGen;
 import umontreal.iro.lecuyer.randvar.RandomVariateGen;
 import umontreal.iro.lecuyer.rng.MRG32k3a;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 public class ServersHandler {
@@ -17,7 +17,6 @@ public class ServersHandler {
 	int serverNumber=1, choice;
 	//ArrayList<ReservedVM> reservedVMs = new ArrayList<ReservedVM>();
 	ArrayList<ReservedVM> reservedToActivate = new ArrayList<ReservedVM>();
-	//metto le reserved in vmtoactivate e poi quando è il loro turno le avvio e le elimino e le perdo.
 
 	ArrayList<VMReservedType> typeOfReservedVMs = new ArrayList<VMReservedType>();
 	

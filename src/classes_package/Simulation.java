@@ -21,7 +21,7 @@ public class Simulation{
 		double [] deactivationTimeout = {settings.getDeactivationTimeout()};
 		int [] isteresi = {settings.getIsteresi()};
 		
-		int iterations = settings.getIterations();                //NUMERO ITERAZIONI PER OGNI SCENARIO
+		int iterations = settings.getIterations();                //ITERATIONS NUMBER FOR EACH SCENARIO
 		int j = 0;
 		
 		settings.main();
@@ -52,20 +52,21 @@ public class Simulation{
 			int isteresiLength = isteresi[j];
 			
 				for(i = 0; i<iterations; i++){
-						ServersHandlerDeactivationThreshold mainHandlerHybridCopy = new ServersHandlerDeactivationThreshold ();
-						mainHandlerHybridCopy.main(averageBootingTime,firstDeactivationTimeOut,isteresiLength,this,i);
+                        ServersHandlerDeactivationThreshold mainHandlerHybridCopy = new ServersHandlerDeactivationThreshold ();
+                        mainHandlerHybridCopy.main(averageBootingTime,firstDeactivationTimeOut,isteresiLength,this,i);
 					}
 				
 				// This for cycle is useless because iterations is fixed to 1
-				
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_"+(int)averageBootingTime+"_"+isteresiLength+"_"+(int)firstDeactivationTimeOut+".txt", true)));
-			out.println("-----fine simulazione con booting time:"+averageBootingTime+" isteresi: "+isteresiLength+" timeout:"+firstDeactivationTimeOut);
-			out.println("awt media: "+String.format("%.4f",totAwt/iterations)+" min: "+String.format("%.4f",minAwt)+" Max: "+String.format("%.4f",maxAwt));
-			out.println("peak medio: "+String.format("%.2f",totPeak/iterations)+" Min : "+String.format("%.2f",minPeak)+ " Max : "+String.format("%.2f",maxPeak));
-			out.println("cost medio: "+String.format("%.2f",totCost/iterations)+" Min: "+String.format("%.2f",minCost)+" Max : "+String.format("%.2f",maxCost));
-			out.println("reconfigurations medio: "+(totReconf/iterations)+" Min: "+minReconf+" Max reconfigurations: "+maxReconf);
-			out.println("availab media: "+String.format("%.4f",totAvailability/iterations)+" Min: "+String.format("%.4f",minAvailability)+" Max: "+String.format("%.4f",maxAvailability));
-			out.close();
+
+                    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_" + (int) averageBootingTime + "_" + isteresiLength + "_" + (int) firstDeactivationTimeOut + ".txt", true)));
+                    out.println("\n-----fine simulazione con booting time: " + averageBootingTime + ", isteresi: " + isteresiLength + ", timeout:" + firstDeactivationTimeOut);
+                    out.println("Awt Media: " + String.format("%.4f", totAwt / iterations) + ", Min: " + String.format("%.4f", minAwt) + ", Max: " + String.format("%.4f", maxAwt));
+                    out.println("Peak Medio: " + String.format("%.2f", totPeak / iterations) + ", Min : " + String.format("%.2f", minPeak) + ", Max : " + String.format("%.2f", maxPeak));
+                    out.println("Cost Medio: " + String.format("%.2f", totCost / iterations) + ", Min: " + String.format("%.2f", minCost) + ", Max : " + String.format("%.2f", maxCost));
+                    out.println("Reconfigurations Medio: " + (totReconf / iterations) + ", Min: " + minReconf + ", Max reconfigurations: " + maxReconf);
+                    out.println("Availab Media: " + String.format("%.4f", totAvailability / iterations) + ", Min: " + String.format("%.4f", minAvailability) + ", Max: " + String.format("%.4f", maxAvailability));
+                    out.close();
+
 		}
 	}
 }

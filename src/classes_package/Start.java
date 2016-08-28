@@ -25,11 +25,9 @@ public class Start {
 		
 		// This lock object is used to guarantee threads "sequentiality".
 		Object lock = new Object();
-		System.out.println("START [1]: Sto per creare i tre threads.");
 		
 		startSimulation = new Thread(() -> {
             synchronized (lock) {
-            	System.out.println("START [7]: Ho creato lo StartSimulation, che partirà quanto la variabile boolean init sarà true.");
                 while (initialization == false || otherSettings == false) {
                     try {
                         lock.wait();
@@ -39,17 +37,12 @@ public class Start {
                 }
             }
 
-            System.out.println("START [8]: Le variabili initialization and otherSettings are true: che i giochi abbiano inizio.");
-            System.out.println("START [9]: I settings uploadati sono: ");
             settings.main();
-            
-            System.out.println("[START [10]: Ora qui ci sarebbero da stampare anche quelli advanced, ma ho già provato, funziona tutto e non ne ho voglia. (:]");
             
             Simulation simulation = new Simulation() ;
     		try {
     			simulation.main(settings, advancedSettings);
     		} catch (IOException e) {
-    		// TODO Auto-generated catch block
     		e.printStackTrace();
     		}
             
@@ -57,8 +50,7 @@ public class Start {
 		
 		askAdvancedSettings = new Thread(() -> {
 			synchronized (lock) {
-				
-				System.out.println("START [4]: L'utente ha selezionato di modificare gli advanced settings.");
+
 				while (initialization == false) {
                     try {
                         lock.wait();
@@ -66,25 +58,19 @@ public class Start {
                         e.printStackTrace();
                     	}
                 	}
-			
-				System.out.println("START [5]: Creo il JFrame dove chiedo all'utente gli advanced settings.");
 		           
                 Advanced_Settings_GUI Advanced_Settings_GUI = new Advanced_Settings_GUI();
                 Advanced_Settings_GUI.main();
-             
-                System.out.println("START [6]: L'interfaccia è stata creata, ed è attualmente online.");
+
 			}
 		});
 		
 
 		askSettings = new Thread(() -> {
             synchronized (lock) {
-            	System.out.println("START [2]: Creo il JFrame dove chiedo all'utente i vari settings.");
            
                 MMs_Simulator_GUI MMs_Simulator_GUI = new MMs_Simulator_GUI();
                 MMs_Simulator_GUI.main();
-             
-                System.out.println("START [3]: L'interfaccia è stata creata, ed è attualmente online.");
 
                 lock.notify();
             }
