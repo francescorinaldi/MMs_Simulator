@@ -4,20 +4,20 @@ final class Settings {
 
     private double bootingTime;
     private double deactivationTimeout;
-    private int isteresi;
+    private int hysteresis;
     private int iterations;
 	
-    public Settings(double bootingTime, double deactivationTimeout, int isteresi, int iterations) {
+    public Settings(double bootingTime, double deactivationTimeout, int hysteresis, int iterations) {
         this.bootingTime = bootingTime;
         this.deactivationTimeout = deactivationTimeout;
-        this.isteresi = isteresi;
+        this.hysteresis = hysteresis;
         this.iterations = iterations;
     }
     
     public Settings(){
     	bootingTime = 900.00;
         deactivationTimeout = 3600.00;
-        isteresi = 3;
+        hysteresis = 3;
         iterations = 1;
 	}
 
@@ -29,8 +29,8 @@ final class Settings {
         return deactivationTimeout;
     }
 
-	public int getIsteresi(){
-		return isteresi;
+	public int getHysteresis(){
+		return hysteresis;
 	}
 	
 	public int getIterations(){
@@ -45,8 +45,8 @@ final class Settings {
 		this.deactivationTimeout = deactivationTimeout;
 	}
 	
-	public void setIsteresi(int isteresi){
-		this.isteresi = isteresi;
+	public void setHysteresis(int hysteresis){
+		this.hysteresis = hysteresis;
 	}
 	
 	public void setIterations(int iterations){
@@ -55,6 +55,6 @@ final class Settings {
 
 
 public void main() {
-    System.out.println(getBootingTime() + " " + getDeactivationTimeout() + " " + getIsteresi() + " " + getIterations());
+    System.out.println(getBootingTime() + " " + getDeactivationTimeout() + " " + getHysteresis() + " " + getIterations());
 	}
 }

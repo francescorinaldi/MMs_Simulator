@@ -25,25 +25,25 @@ public class MMs_Simulator_GUI extends JPanel
 	//Default values for the fields
     private double bootingTime = 900.00;
     private double deactivationTimeout = 3600.00;
-    private int isteresi = 3;
+    private int hysteresis = 3;
     private int iterations = 1;
 
     //Labels to identify the fields
     private JLabel bootingTimeLabel;
     private JLabel deactivationTimeoutLabel;
-    private JLabel isteresiLabel;
+    private JLabel hysteresisLabel;
     private JLabel iterationsLabel;
     
     //Strings for the labels
     private static String bootingTimeString = "Booting Time: ";
     private static String deactivationTimeoutString = "DeactivationTimeout: ";
-    private static String isteresiString = "Isteresi: ";
+    private static String hysteresisString = "Hysteresis: ";
     private static String iterationsString = "Iterations: ";
 
     //Fields for data entry
     private static JFormattedTextField bootingTimeField;
     private static JFormattedTextField deactivationTimeoutField;
-    private static JFormattedTextField isteresiField;
+    private static JFormattedTextField hysteresisField;
     private static JFormattedTextField iterationsField;
 
     //Formats to format and parse numbers
@@ -76,7 +76,7 @@ public class MMs_Simulator_GUI extends JPanel
         //Create the labels.
         bootingTimeLabel = new JLabel(bootingTimeString);
         deactivationTimeoutLabel = new JLabel(deactivationTimeoutString);
-        isteresiLabel = new JLabel(isteresiString);
+        hysteresisLabel = new JLabel(hysteresisString);
         iterationsLabel = new JLabel(iterationsString);
 
         //Create the text fields and set them up.
@@ -90,10 +90,10 @@ public class MMs_Simulator_GUI extends JPanel
         deactivationTimeoutField.setColumns(10);
         deactivationTimeoutField.addPropertyChangeListener("value", this);
 
-        isteresiField = new JFormattedTextField(integerFormat);
-        isteresiField.setValue(new Integer(isteresi));
-        isteresiField.setColumns(10);
-        isteresiField.addPropertyChangeListener("value", this);
+        hysteresisField = new JFormattedTextField(integerFormat);
+        hysteresisField.setValue(new Integer(hysteresis));
+        hysteresisField.setColumns(10);
+        hysteresisField.addPropertyChangeListener("value", this);
         
         iterationsField = new JFormattedTextField(integerFormat);
         iterationsField.setValue(new Integer(iterations));
@@ -103,7 +103,7 @@ public class MMs_Simulator_GUI extends JPanel
         //Tell accessibility tools about label / textfield pairs.
         bootingTimeLabel.setLabelFor(bootingTimeField);
         deactivationTimeoutLabel.setLabelFor(deactivationTimeoutField);
-        isteresiLabel.setLabelFor(isteresiField);
+        hysteresisLabel.setLabelFor(hysteresisField);
         iterationsLabel.setLabelFor(iterationsField);
         
         // Disable btnEmpty and make it not visible.
@@ -114,7 +114,7 @@ public class MMs_Simulator_GUI extends JPanel
         JPanel labelPane = new JPanel(new GridLayout(0,1));
         labelPane.add(bootingTimeLabel);
         labelPane.add(deactivationTimeoutLabel);
-        labelPane.add(isteresiLabel);
+        labelPane.add(hysteresisLabel);
         labelPane.add(iterationsLabel);
         labelPane.add(btnAdvancedSettings);
         labelPane.add(btnOK);
@@ -123,7 +123,7 @@ public class MMs_Simulator_GUI extends JPanel
         JPanel fieldPane = new JPanel(new GridLayout(0,1));
         fieldPane.add(bootingTimeField);
         fieldPane.add(deactivationTimeoutField);
-        fieldPane.add(isteresiField);
+        fieldPane.add(hysteresisField);
         fieldPane.add(iterationsField);
         fieldPane.add(btnEmpty);
         fieldPane.add(btnCancel);
@@ -142,8 +142,8 @@ public class MMs_Simulator_GUI extends JPanel
             bootingTime = ((Number)bootingTimeField.getValue()).doubleValue();
         } else if (source == deactivationTimeoutField) {
             deactivationTimeout = ((Number)deactivationTimeoutField.getValue()).doubleValue();
-        } else if (source == isteresiField) {
-        	isteresi = ((Number)isteresiField.getValue()).intValue();
+        } else if (source == hysteresisField) {
+        	hysteresis = ((Number)hysteresisField.getValue()).intValue();
         } else if (source == iterationsField) {
         	iterations = ((Number)iterationsField.getValue()).intValue();
         }
@@ -173,13 +173,13 @@ public class MMs_Simulator_GUI extends JPanel
              public void actionPerformed(ActionEvent event) {
                 double bootingTime = Double.valueOf(bootingTimeField.getText());
                 double deactivationTimeout = Double.valueOf(deactivationTimeoutField.getText());
-                int isteresi = Integer.parseInt(isteresiField.getText());
+                int hysteresis = Integer.parseInt(hysteresisField.getText());
                 int iterations = Integer.parseInt(iterationsField.getText());
-                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout : " + deactivationTimeout + "\nIsteresi: " + isteresi + "\nIterations: " + iterations);
+                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout : " + deactivationTimeout + "\nHysteresis: " + hysteresis + "\nIterations: " + iterations);
                  
                 settings.setBootingTime(bootingTime);
                 settings.setDeactivationTimeout(deactivationTimeout);
-                settings.setIsteresi(isteresi);
+                settings.setHysteresis(hysteresis);
                 settings.setIterations(iterations);
   
                 settings.main();
@@ -202,13 +202,13 @@ public class MMs_Simulator_GUI extends JPanel
             public void actionPerformed(ActionEvent event) {
                 double bootingTime = Double.valueOf(bootingTimeField.getText());
                 double deactivationTimeout = Double.valueOf(deactivationTimeoutField.getText());
-                int isteresi = Integer.parseInt(isteresiField.getText());
+                int hysteresis = Integer.parseInt(hysteresisField.getText());
                 int iterations = Integer.parseInt(iterationsField.getText());
-                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout :" + deactivationTimeout + "\nIsteresi: " + isteresi + "\nIterations: " + iterations);
+                System.out.println("Booting Time: " + bootingTime + "\nDeactivation Timeout :" + deactivationTimeout + "\nHysteresis: " + hysteresis + "\nIterations: " + iterations);
                 
                 settings.setBootingTime(bootingTime);
                 settings.setDeactivationTimeout(deactivationTimeout);
-                settings.setIsteresi(isteresi);
+                settings.setHysteresis(hysteresis);
                 settings.setIterations(iterations);
  
                 settings.main();

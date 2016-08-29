@@ -19,7 +19,7 @@ public class Simulation{
 		//These are the parameters needed to do several simulations.
 		double [] bootingTime = {settings.getBootingTime()};
 		double [] deactivationTimeout = {settings.getDeactivationTimeout()};
-		int [] isteresi = {settings.getIsteresi()};
+		int [] hysteresis = {settings.getHysteresis()};
 		
 		int iterations = settings.getIterations();                //ITERATIONS NUMBER FOR EACH SCENARIO
 		int j = 0;
@@ -49,17 +49,17 @@ public class Simulation{
 			averageBootingTime = bootingTime[j];
 			firstDeactivationTimeOut = deactivationTimeout[j];
 			
-			int isteresiLength = isteresi[j];
+			int hysteresisLength = hysteresis[j];
 			
 				for(i = 0; i<iterations; i++){
                         ServersHandlerDeactivationThreshold mainHandlerHybridCopy = new ServersHandlerDeactivationThreshold ();
-                        mainHandlerHybridCopy.main(averageBootingTime,firstDeactivationTimeOut,isteresiLength,this,i);
+                        mainHandlerHybridCopy.main(averageBootingTime,firstDeactivationTimeOut,hysteresisLength,this,i);
 					}
 				
 				// This for cycle is useless because iterations is fixed to 1
 
-                    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_" + (int) averageBootingTime + "_" + isteresiLength + "_" + (int) firstDeactivationTimeOut + ".txt", true)));
-                    out.println("\n-----fine simulazione con booting time: " + averageBootingTime + ", isteresi: " + isteresiLength + ", timeout:" + firstDeactivationTimeOut);
+                    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_" + (int) averageBootingTime + "_" + hysteresisLength + "_" + (int) firstDeactivationTimeOut + ".txt", true)));
+                    out.println("\n-----fine simulazione con booting time: " + averageBootingTime + ", hysteresis: " + hysteresisLength + ", timeout:" + firstDeactivationTimeOut);
                     out.println("Awt Media: " + String.format("%.4f", totAwt / iterations) + ", Min: " + String.format("%.4f", minAwt) + ", Max: " + String.format("%.4f", maxAwt));
                     out.println("Peak Medio: " + String.format("%.2f", totPeak / iterations) + ", Min : " + String.format("%.2f", minPeak) + ", Max : " + String.format("%.2f", maxPeak));
                     out.println("Cost Medio: " + String.format("%.2f", totCost / iterations) + ", Min: " + String.format("%.2f", minCost) + ", Max : " + String.format("%.2f", maxCost));
