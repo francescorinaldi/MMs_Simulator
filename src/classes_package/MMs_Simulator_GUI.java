@@ -150,7 +150,7 @@ public class MMs_Simulator_GUI extends JPanel
     }
     
     /**
-     * Create the GUI and show it.  For thread safety,
+     * Create the GUI and show it. For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
      */
@@ -187,7 +187,6 @@ public class MMs_Simulator_GUI extends JPanel
                 Start.setSettings(settings);
                 Start.setInitialization(true);
                 
-                //Start.startSimulation.start();
         		Start.askAdvancedSettings.start();
                  
                 frame.dispose();

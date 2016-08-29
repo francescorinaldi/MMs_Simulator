@@ -148,9 +148,6 @@ public class Manager {
 				}
 				
 				
-				
-				
-				
 				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("risultato_simulaz_"+(int)handler.averageBootingTime+"_"+handler.isteresiLength+"_"+(int)handler.firstDeactivationTimeOut+".txt", true)));
 				out.println("------------------------------------------------ "+(simulationNumber+1)+":\n");
 				out.println("Numero massimo pacchetti in coda: "+mainQueue.maxDimension);
