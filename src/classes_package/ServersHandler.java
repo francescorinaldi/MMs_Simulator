@@ -37,11 +37,12 @@ public class ServersHandler {
 	
 	public void main (int simulationNumber) 
 	{
-		//double interval=10.0;//Interval in seconds between two values in the log file.
+		//double interval=10.0;			//Interval in seconds between two values in the log file.
 		averageBootingTime=600.0;
-		mainQueue = new Queue(1000); //A global queue for all the classes is instantiated 
+		mainQueue = new Queue(1000);	//A global queue for all the classes is instantiated 
 		minBillingTime=3600.0;
-	//	int repe=1;
+		//int repe=1;
+		
 		//Get the necessary information about VMs, thresholds and payments
 		XMLparser.XMLReserved(typeOfReservedVMs, thresholds);//Ask the XML to populate reservedVMs and Payments for the reservedVms
 		XMLparser.XMLOnDemand(ondemandVMs, thresholds);//Ask the XMLparser to populate singleVMs and thresholds, parsing the XML OnDemand file.
@@ -49,12 +50,12 @@ public class ServersHandler {
 		//Rilevazione picchi prima di invocare Manager
 		//this.peaksDiscovering(reservedVMs, interval);
 		
-		//Start the Manager
-//		mainManager=new Manager(interval, serversList, mainQueue,this,simulationNumber, repe);
-//		paymentsHandler = new PaymentsHandler(typeOfReservedVMs, ondemandVMs, mainManager, minBillingTime);
-//
-//		mainManager.startManager();
+		/*Start the Manager
+		mainManager=new Manager(interval, serversList, mainQueue,this,simulationNumber, repe);
+		paymentsHandler = new PaymentsHandler(typeOfReservedVMs, ondemandVMs, mainManager, minBillingTime);
 		
+		mainManager.startManager();
+		*/
 		return;
 
 	}
